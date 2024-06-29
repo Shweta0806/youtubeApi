@@ -24,6 +24,12 @@ class _ApiscreenState extends State<Apiscreen> {
       currentIndex++;
     });
   }
+
+  void _showImage(Datum datum,String newUrl){
+    setState(() {
+      datum.snippet.thumbnails.maxres.url=newUrl;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +69,16 @@ class _ApiscreenState extends State<Apiscreen> {
                           children: [
                             Column(
                               children: [
-                                Center(
-                                  child: Container(
-                                    height: 200,
-                                    width: 200,
-                                    child: Image.network(
-                                        datum.snippet.thumbnails.maxres.url),
-                                  ),
+                                if(datum.snippet.thumbnails.maxres.url != null)
+
+
+                                  Center(
+                                      child: Container(
+                                        height: 200,
+                                        width: 200,
+                                        child: Image.network(
+                                            datum.snippet.thumbnails.maxres.url),
+                                      )
                                 )
                               ],
                             ),
@@ -77,32 +86,53 @@ class _ApiscreenState extends State<Apiscreen> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                  height: 50,
-                                  width: 80,
-                                  child: Image.network(datum.snippet.thumbnails
-                                      .thumbnailsDefault.url),
+                                GestureDetector(
+                                  onTap: (){
+                                    _showImage(datum, datum.snippet.thumbnails
+                                        .thumbnailsDefault.url);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 80,
+                                    child: Image.network(datum.snippet.thumbnails
+                                        .thumbnailsDefault.url),
+                                  ),
                                 ),
                                 SizedBox(height: 5),
-                                Container(
-                                  height: 50,
-                                  width: 80,
-                                  child: Image.network(
-                                      datum.snippet.thumbnails.medium.url),
+                                GestureDetector(
+                                  onTap: (){
+                                    _showImage(datum,datum.snippet.thumbnails.medium.url);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 80,
+                                    child: Image.network(
+                                        datum.snippet.thumbnails.medium.url),
+                                  ),
                                 ),
                                 SizedBox(height: 5),
-                                Container(
-                                  height: 50,
-                                  width: 80,
-                                  child: Image.network(
-                                      datum.snippet.thumbnails.high.url),
+                                GestureDetector(
+                                  onTap: (){
+                                    _showImage(datum,datum.snippet.thumbnails.high.url );
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 80,
+                                    child: Image.network(
+                                        datum.snippet.thumbnails.high.url),
+                                  ),
                                 ),
                                 SizedBox(height: 5),
-                                Container(
-                                  height: 50,
-                                  width: 80,
-                                  child: Image.network(
-                                      datum.snippet.thumbnails.standard.url),
+                                GestureDetector(
+                                  onTap: (){
+                                    _showImage(datum, datum.snippet.thumbnails.standard.url);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 80,
+                                   child: Image.network(
+                                        datum.snippet.thumbnails.standard.url),
+                                  ),
                                 ),
                               ],
                             ),
